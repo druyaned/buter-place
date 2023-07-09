@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бутер-Плэис</title>
+  </head>
+  <body>
+    <h1>Добро пожаловать в...</h1>
+    <img th:src="@{/images/buter.png}"/><br/>
+    <div th:if="${!hasUser}">
+      <a th:href="@{/login}" id="fresh">Войти в Бурет-Плэис</a>
+    </div>
+    <div th:if="${hasUser}">
+      <a th:href="@{/design}" id="design">Сварганить Бутер</a><br/>
+      <a th:href="@{/orders/show}" id="show">Мои заказы</a><br/>
+      <a th:href="@{/logout}" id="logout">Выйти из Бурет-Плэис</a>
+    </div>
+  </body>
+</html>

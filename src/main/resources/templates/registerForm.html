@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бутер-Плэис</title>
+  </head>
+  <body>
+    <h1>Зарегистрируемся!</h1><br/>
+    <a th:href="@{/home}" id="home">На главную страничку</a><br/>
+    <form method="POST" th:action="@{/register}" id="registrationForm"
+          th:object="${registrationForm}">
+      <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> <!--csrf security-->
+      <label for="username">Пользователь (логин): </label>
+      <input type="text" th:field="*{username}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('username')}"
+            th:errors="*{username}">username error</span><br/>
+      <label for="password">Пароль: </label>
+      <input type="text" th:field="*{password}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('password')}"
+            th:errors="*{password}">password error</span><br/>
+      <label for="name">Имя: </label>
+      <input type="text" th:field="*{name}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('name')}"
+            th:errors="*{name}">name error</span><br/>
+      <label for="address">Адрес: </label>
+      <input type="text" th:field="*{address}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('address')}"
+            th:errors="*{address}">address error</span><br/>
+      <label for="phoneNumber">Номер телефона: </label>
+      <input type="text" th:field="*{phoneNumber}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('phoneNumber')}"
+            th:errors="*{phoneNumber}">phoneNumber error</span><br/>
+      <input type="submit" value="Зарегистрироваться"/>
+    </form>
+  </body>
+</html>

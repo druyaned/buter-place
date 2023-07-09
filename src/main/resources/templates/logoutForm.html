@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бутер-Плэис</title>
+  </head>
+  <body>
+    <h1>Выйдем виртуальненько из Бутер-Плэис!</h1>
+    <a th:href="@{/home}" id="home">На главную страничку</a><br/>
+    <form method="POST" th:action="@{/logout}" id="loginForm">
+      <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> <!--csrf security-->
+      <label>Точно выходим? </label>
+      <input type="submit" value="Да, точно выходим!"/>
+    </form>
+  </body>
+</html>

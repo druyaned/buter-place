@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бутер-Плэис</title>
+  </head>
+  <body>
+    <h1>Войдем виртуальненько в Бутер-Плэис!</h1><br/>
+    <a th:href="@{/home}" id="home">На главную страничку</a><br/>
+    <p>Вы тут впервой? <a th:href="@{/register}">Зарегистрируемся</a>!</p>
+    <div th:if="${param.error}">Увы, с такими логином и паролем не войдем!</div>
+    <form method="POST" th:action="@{/login}" id="loginForm">
+      <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> <!--csrf security-->
+      <label for="username">Пользователь (Логин): </label>
+      <input type="text" name="username" id="username"/><br/>
+      <label for="password">Пароль: </label>
+      <input type="text" name="password" id="password"/><br/>
+      <input type="submit" value="Войти"/>
+    </form>
+  </body>
+</html>

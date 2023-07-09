@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бутер-Плэис</title>
+    <style>
+      table, th, td {
+          border: 1px solid;
+          border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ваши Заказы!</h1>
+    <img th:src="@{/images/buter.png}"/><br/>
+    <a th:href="@{/home}" id="home">На главную страничку</a><br/>
+    <a th:href="@{/logout}" id="logout">Выйти из Бурет-Плэис</a><br/>
+    <h3>
+      '<span th:text="${buterUser.username}">username</span>', несколько Ваших последних заказов:
+    </h3>
+    <table>
+      <tr>
+        <th>Создан</th>
+        <th>Получатель</th>
+        <th>Адрес</th>
+        <th>Карта</th>
+        <th>Бутеры</th>
+      </tr>
+      <tr th:each="buterOrder : ${buterOrders}">
+        <td><span th:text="${buterOrder.createdAt}">createdAt</span></td>
+        <td><span th:text="${buterOrder.recipient}">recipient</span></td>
+        <td><span th:text="${buterOrder.deliveryAddress}">deliveryAddress</span></td>
+        <td><span th:text="${buterOrder.cardNumber}">deliveryAddress</span></td>
+        <td>
+          <div th:each="buter : ${buterOrder.buters}"
+               th:text="${buter.name}">deliveryAddress</div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

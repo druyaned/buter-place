@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бутер-Плэис</title>
+  </head>
+  <body>
+    <h1>Оформим Заказ!</h1>
+    <img th:src="@{/images/buter.png}"/><br/>
+    <a th:href="@{/design}" id="design">Сварганить еще бутер</a><br/>
+    <a th:href="@{/home}" id="home">На главную страничку</a><br/>
+    <a th:href="@{/logout}" id="logout">Выйти из Бурет-Плэис</a><br/>
+    <form method="POST" th:action="@{/orders}" th:object="${buterOrder}">
+      <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> <!--csrf security-->
+      <h3>Бутеры в заказе:</h3>
+      <ul>
+        <li th:each="buter : ${buterOrder.buters}">
+          <span th:text="${buter.name}">Buter Name</span>
+        </li>
+      </ul>
+      <h3>Организуем доставочку...</h3>
+      <label for="recipient">Получатель: </label>
+      <input type="text" id="recipient" name="recipient" th:value="${buterUser.name}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('recipient')}"
+            th:errors="*{recipient}">recipient error</span><br/>
+      <label for="deliveryAddress">Адрес: </label>
+      <input type="text" id="deliveryAddress" name="deliveryAddress"
+             th:value="${buterUser.address}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('deliveryAddress')}"
+            th:errors="*{deliveryAddress}">deliveryAddress error</span><br/>
+      <label for="cardNumber">Номер карты: </label>
+      <input type="text" th:field="*{cardNumber}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('cardNumber')}"
+            th:errors="*{cardNumber}">cardNumber error</span><br/>
+      <label for="cardExpiration">Истечение карты (ММ/ГГ): </label>
+      <input type="text" th:field="*{cardExpiration}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('cardExpiration')}"
+            th:errors="*{cardExpiration}">cardExpiration error</span><br/>
+      <label for="cardCVV">CVV (3 цифры): </label>
+      <input type="text" th:field="*{cardCVV}"/>
+      <span class="validationError" th:if="${#fields.hasErrors('cardCVV')}"
+            th:errors="*{cardCVV}">cardCVV error</span><br/>
+      <input type="submit" value="Оформить Заказ"/>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бутер-Плэис</title>
+  </head>
+  <body>
+    <h1>Сварганим Бутер!</h1>
+    <img th:src="@{/images/buter.png}"/><br/>
+    <form method="POST" th:object="${buter}">
+      <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> <!--csrf security-->
+      <div th:if="${!buterOrder.getButers().isEmpty()}">
+        <a th:href="@{/orders/current}" id="current">Продолжить оформление заказа</a>
+      </div>
+      <a th:href="@{/home}" id="home">На главную страничку</a><br/>
+      <a th:href="@{/logout}" id="logout">Выйти из Бурет-Плэис</a><br/>
+      <span class="validationError" th:if="${#fields.hasErrors('ingredientRefs')}"
+            th:errors="*{ingredientRefs}">IngredientRefs Error</span><br/>
+      <div class="grid">
+        <div class="ingredient-group" id="wraps">
+          <h3>Обертка:</h3>
+          <div th:each="ingredient : ${wrap}">
+            <input th:field="*{ingredientRefs}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">ingredientName</span><br/>
+          </div>
+        </div>
+        <div class="ingredient-group" id="proteins">
+          <h3>Белок:</h3>
+          <div th:each="ingredient : ${protein}">
+            <input th:field="*{ingredientRefs}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">ingredientName</span><br/>
+          </div>
+        </div>
+        <div class="ingredient-group" id="veggies">
+          <h3>Овощ:</h3>
+          <div th:each="ingredient : ${veggie}">
+            <input th:field="*{ingredientRefs}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">ingredientName</span><br/>
+          </div>
+        </div>
+        <div class="ingredient-group" id="cheeses">
+          <h3>Сыр:</h3>
+          <div th:each="ingredient : ${cheese}">
+            <input th:field="*{ingredientRefs}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">ingredientName</span><br/>
+          </div>
+        </div>
+        <div class="ingredient-group" id="sauces">
+          <h3>Соус:</h3>
+          <div th:each="ingredient : ${sauce}">
+            <input th:field="*{ingredientRefs}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">ingredientName</span><br/>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>Название Бутера:</h3>
+        <input th:field="*{name}" type="text"/>
+        <span class="validationError" th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}">Name Error</span><br/>
+        <button>Отправить Бутер</button>
+      </div>
+    </form>
+  </body>
+</html>
